@@ -30,8 +30,11 @@ jobs:
         unzip commandlinetools-linux-6858069_latest.zip -d android-sdk
         mkdir -p $HOME/Android/Sdk/cmdline-tools
         mv android-sdk/cmdline-tools $HOME/Android/Sdk/cmdline-tools/latest
-        ls -la $HOME/Android/Sdk/cmdline-tools/latest
-        pwd
+        echo "storeFile=$HOME/keystore.jks" > $HOME/keystore.properties
+        echo "storePassword=${{ secrets.KEYSTORE_PASSWORD }}" >> $HOME/keystore.properties
+        echo "keyAlias=${{ secrets.KEY_ALIAS }}" >> $HOME/keystore.properties
+        echo "keyPassword=${{ secrets.KEY_PASSWORD }}" >> $HOME/keystore.properties
+          
         echo "y" | $HOME/Android/Sdk/cmdline-tools/latest/bin/sdkmanager --licenses
         $HOME/Android/Sdk/cmdline-tools/latest/bin/sdkmanager --update
         $HOME/Android/Sdk/cmdline-tools/latest/bin/sdkmanager "platform-tools" "platforms;android-30" "build-tools;30.0.3"
