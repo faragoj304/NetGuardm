@@ -25,15 +25,15 @@ jobs:
         
     - name: Set up keystore.properties
       run: |
-        echo "storeFile=$HOME/keystore.jks" > $HOME/work/NetGuardm/NetGuardm/keystore.properties
-        echo "storePassword=${{ secrets.KEYSTORE_PASSWORD }}" >> $HOME/work/NetGuardm/NetGuardm/keystore.properties
-        echo "keyAlias=${{ secrets.KEY_ALIAS }}" >> $HOME/work/NetGuardm/NetGuardm/keystore.properties
-        echo "keyPassword=${{ secrets.KEY_PASSWORD }}" >> $HOME/work/NetGuardm/NetGuardm/keystore.properties
+        echo "storeFile=$HOME/keystore.jks" > $HOME/keystore.properties
+        echo "storePassword=${{ secrets.KEYSTORE_PASSWORD }}" >> $HOME/keystore.properties
+        echo "keyAlias=${{ secrets.KEY_ALIAS }}" >> $HOME/keystore.properties
+        echo "keyPassword=${{ secrets.KEY_PASSWORD }}" >> $HOME/keystore.properties
 
     - name: Copy keystore file
       run: |
         mkdir -p $HOME/keystore
-        echo "${{ secrets.KEYSTORE_FILE_PATH }}" > $HOME/work/NetGuardm/NetGuardm/keystore/keystore.jks
+        echo "${{ secrets.KEYSTORE_FILE_PATH }}" > $HOME/keystore/keystore.jks
         ls -la $HOME/keystore
         ls -la $HOME
         pwd
