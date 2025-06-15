@@ -31,6 +31,7 @@ jobs:
         mkdir -p $HOME/Android/Sdk/cmdline-tools/latest
         mv $HOME/Android/Sdk/cmdline-tools/cmdline-tools/* $HOME/Android/Sdk/cmdline-tools/latest/
         rmdir $HOME/Android/Sdk/cmdline-tools/cmdline-tools
+        cat /home/runner/work/_temp/*.sh
         echo "y" | android-sdk/cmdline-tools/bin/sdkmanager --licenses
         android-sdk/cmdline-tools/bin/sdkmanager --update
         android-sdk/cmdline-tools/bin/sdkmanager "platform-tools" "platforms;android-30" "build-tools;30.0.3"
