@@ -1,0 +1,35 @@
+name: Android APK Build
+
+on:
+  push:
+    branches:
+      - main   
+  pull_request:
+    branches:
+      - main   
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check out repository
+      uses: actions/checkout@v2
+
+    - name: Set up JDK 11
+      uses: actions/setup-java@v2
+      with:
+        java-version: '11'
+        distribution: 'adoptopenjdk'
+
+    - name: Set up Android SDK
+      run: |
+        sudo apt-get install -y wget
+        wget https://dl.google.com/android/repository/commandlinetools-linux-6858069_latest.zip
+        unzip commandlinetools-linux-6858069_latest.zip -d android-sdk
+        echo "y" | android-sdk/cmdline-tools/bin/sdkmanager --licenses
+        android-sdk/cmdline-tools/bin/sdkmanager --update
+        android-sdk/cmdline-tools/bin/sdkmanager "platform-tools" "platforms;android-30" "build-tools;30.0.3"
+
+    - name: Build APK
+      run: ./gradlew assembleRelease  
