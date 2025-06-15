@@ -28,17 +28,13 @@ jobs:
         sudo apt-get install -y wget unzip
         wget https://dl.google.com/android/repository/commandlinetools-linux-6858069_latest.zip
         unzip commandlinetools-linux-6858069_latest.zip -d android-sdk
-        cat /home/runner/work/_temp/*.sh >&2
-        ls -la 2>&1
-        ls -la
-        pwd
-        find /home/runner/Android/Sdk/cmdline-tools/ -ls
         mkdir -p $HOME/Android/Sdk/cmdline-tools/latest
-        mv $HOME/Android/Sdk/cmdline-tools/cmdline-tools/* $HOME/Android/Sdk/cmdline-tools/latest/
-        rmdir $HOME/Android/Sdk/cmdline-tools/cmdline-tools
-        echo "y" | android-sdk/cmdline-tools/bin/sdkmanager --licenses
-        android-sdk/cmdline-tools/bin/sdkmanager --update
-        android-sdk/cmdline-tools/bin/sdkmanager "platform-tools" "platforms;android-30" "build-tools;30.0.3"
+        mv android-sdk/cmdline-tools $HOME/Android/Sdk/cmdline-tools/latest
+        ls -la $HOME/Android/Sdk/cmdline-tools/latest
+        pwd
+        echo "y" | $HOME/Android/Sdk/cmdline-tools/latest/bin/sdkmanager --licenses
+        $HOME/Android/Sdk/cmdline-tools/latest/bin/sdkmanager --update
+        $HOME/Android/Sdk/cmdline-tools/latest/bin/sdkmanager "platform-tools" "platforms;android-30" "build-tools;30.0.3"
 
     - name: Build APK
       run: ./gradlew assembleRelease  
