@@ -37,6 +37,8 @@ jobs:
         ls -la $HOME/keystore
         ls -la $HOME
         pwd
+        echo $HOME
+        ls -la /home/runner/work/NetGuardm/NetGuardm/
 
     - name: Set up Android SDK
       run: |
